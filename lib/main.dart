@@ -5,10 +5,14 @@ import 'package:mask/viewmodel/store_model.dart';
 import 'UI/view/main_page.dart';
 
 
-void main() => runApp(ChangeNotifierProvider.value(
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(ChangeNotifierProvider.value(
     value: StoreModel(),
     child: MyApp() ,
   ));
+}
+
 
 
 class MyApp extends StatelessWidget {
