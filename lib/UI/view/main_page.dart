@@ -26,11 +26,7 @@ class MainPage extends StatelessWidget {
           ? loadingWidget()
           : ListView(
         children: storeModel.stores.map((e){
-          return ListTile(
-            title: Text(e.name),
-            subtitle: Text(e.addr),
-            trailing: RemainStatListTile(e),
-          );
+          return RemainStatListTile(e);
         }).toList(),
 //변환하기전에 내가필요한것만 걸러내려면, stores.where((e)는 내가 필요한 것만 걸러냄
 // =>false로 하면 어떤것만 내가 쓸거냐 false 아무조건도 없다
