@@ -28,23 +28,31 @@ class MainPage extends StatelessWidget {
         children: storeModel.stores.map((e){
           return RemainStatListTile(e);
         }).toList(),
-//변환하기전에 내가필요한것만 걸러내려면, stores.where((e)는 내가 필요한 것만 걸러냄
-// =>false로 하면 어떤것만 내가 쓸거냐 false 아무조건도 없다
-//children:stores.where((e){
-//  return e.remainStat == 'plenty' || e.remainStat == 'some' || e.remainStat == 'few'
-// })
-
-
-//              children: stores.map((e) {
-//                  return ListTile(
-//                    title: Text(e.name),
-//                    subtitle: Text(e.addr),
-//                    trailing: _buildRemainStatWidget(e),
-//                  );
-//                }).toList(), //리스트전체를 맵핑해서 e객체를 써서
-//        //이것 전체를toList() 함수를 써서 뿌리고 있다
-//        //변환을 하기 전에 내가 필요한 것만 걸러내고 변환을 한다
       ),
+    );
+  }
+
+  Widget _buildBody(StoreModel storeModel) {   //widget을 리턴하고 storeModel받고
+    if(storeModel.isLoading == true) {
+      return loadingWidget();
+    }
+
+    if (storeModel.stores.isEmpty) {
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text('반경5키로미터이내에 재고있는 매장이 없습니다'),
+            Text('인터넷이 연결되어있는지 확인해 주세요')
+          ],
+        ),
+      );
+    }
+
+    return ListView(
+      children: storeModel.stores.map((e) {
+        return RemainStatListTile(e);
+      }).toList(),
     );
   }
 
